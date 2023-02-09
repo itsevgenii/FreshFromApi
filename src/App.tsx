@@ -13,7 +13,7 @@ function App() {
     <div>
 <Router>
 <Navbar/>
-<NewsContainer filter/>
+<NewsContainer filter={true} search={""} />
 
   </Router> 
     </div>
