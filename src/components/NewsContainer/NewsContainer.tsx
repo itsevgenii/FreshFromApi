@@ -47,7 +47,7 @@ if (filter) {
       clearTimeout(delay);
   
       try {
-        const res = await fetch(`https://gnews.io/api/v4/top-headlines?max=10&q=${keyWord}&language=${language}&country=${country}&category=${category}&apikey=${import.meta.env.VITE_APP_API_KEY}`);
+        const res = await fetch(`https://gnews.io/api/v4/top-headlines?max=10&q=${keyWord?.toLowerCase()}&language=${language}&country=${country}&category=${category}&apikey=${import.meta.env.VITE_APP_API_KEY}`);
         const data = await res.json();
         setNews(data);
       } catch (error) {

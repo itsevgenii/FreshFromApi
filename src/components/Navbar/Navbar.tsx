@@ -177,7 +177,7 @@ return (
    </form> 
 
    <form className={NavbarStyle.form}>
-    <input/>
+   <input type="text" onChange={handleInputChange}/>
   <img src={searchIcon} alt="search icon"/>
    </form>
    </nav>
