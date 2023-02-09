@@ -3,7 +3,7 @@ import AllNews from "../AllNews/AllNews";
 import { ApiData } from "../../utils/ApiData";
 
 interface NewsContainerProps {
-  filter: {} | null;
+  filter: {} | null | any;
 }
 
 const NewsContainer: React.FC<NewsContainerProps> = ({filter}:NewsContainerProps ) => {
@@ -35,7 +35,7 @@ if (filter) {
 
 
   useEffect(() => {
-    let delay: number;
+    let delay: number | any;
 
     const fetchData = async () => {
       clearTimeout(delay);
