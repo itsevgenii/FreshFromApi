@@ -4,14 +4,20 @@ import { ApiData } from "../../utils/ApiData";
 
 interface NewsContainerProps {
   filter: {} | null | any;
+  search: string | null;
 }
 
-const NewsContainer: React.FC<NewsContainerProps> = ({filter}:NewsContainerProps ) => {
+const NewsContainer: React.FC<NewsContainerProps> = ({filter, search}:NewsContainerProps ) => {
   const [news, setNews] = useState<ApiData | null >(null);
   
 
 
   let language: string, country: string, category: string;
+  let keyWord:string | null;
+
+  if(search){
+    keyWord = search;
+  } 
 
 if (filter) {
   ({ language, country, category } = filter);
@@ -36,26 +42,27 @@ if (filter) {
 
   useEffect(() => {
     let delay: number | any;
-
+  
     const fetchData = async () => {
       clearTimeout(delay);
-try{
-      const res = await fetch(`https://gnews.io/api/v4/top-headlines?max=10&language=${language}&country=${country}&category=${category}&apikey=${import.meta.env.VITE_APP_API_KEY}`);
-      const data = await res.json();
-      setNews(data);
-    }
-  catch (error) {
-    console.log("line 48", error);
-alert("Daily Api limit reached. Please try again tomorrow.");
-  }
-}
-
+  
+      try {
+        const res = await fetch(`https://gnews.io/api/v4/top-headlines?max=10&q=${keyWord}&language=${language}&country=${country}&category=${category}&apikey=${import.meta.env.VITE_APP_API_KEY}`);
+        const data = await res.json();
+        setNews(data);
+      } catch (error) {
+        console.log("line 48", error);
+        alert("Daily Api limit reached. Please try again tomorrow.");
+      }
+    };
+  
     delay = setTimeout(fetchData, 1000);
-
+  
     return () => {
       clearTimeout(delay);
     };
-  }, [filter]);
+  }, [filter, search]);
+  
 
   return (
     news? 

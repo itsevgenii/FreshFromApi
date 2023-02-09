@@ -47,6 +47,7 @@ useEffect(() => {
                         <h2>    Breaking News: </h2>
                     <h3>{news.articles[0].title}...</h3>
                     <p>{news.articles[0].description}...</p>
+                    <a href={news.articles[0].url}>read more...</a>
                     </div>
                 </div>
                 <hr/>
@@ -59,10 +60,11 @@ useEffect(() => {
                             return (
                                 <>
                                 <div className={AllNewsStyle.NewsWrapperDesktop} key={id}>
-                                <Link to={`/news/${id}`} target="_blank">
+                                <Link to={article.url} target="_blank">
                                     <img src={article.image} alt={article.title} />
                                     <h4>{article.title.slice(0,28)}...</h4>
                                     <p>{article.description.slice(0, 40)}...</p>
+                                    <p><a href={article.url}>read more...</a></p>
                                 </Link>
                                 </div>
     

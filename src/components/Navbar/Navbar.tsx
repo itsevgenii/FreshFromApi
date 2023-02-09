@@ -5,7 +5,7 @@ import logo from './logo.png'
 import searchIcon from './searchIcon.png'
 import dropdownIcon from './dropdown.png'
 import NewsContainer from '../NewsContainer/NewsContainer';
-
+//.
 //created array of nested objects with languages  to make query params filtering work for the API call
 const languages = [
 { name: "Arabic", code: "ar" },
@@ -89,6 +89,7 @@ const Navbar = () => {
 
   //useState to provide responsiveness and liquidity to the navbar
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const[ search, setSearch] = useState<string | null>("");
 
   //Line 92 to line 95, tried to implement filtereing functionality in a different less efficient way
   // const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
@@ -105,6 +106,11 @@ const Navbar = () => {
     country: "gb",
     category: "business"
   });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
+setSearch(e.target.value)
+  }
 
   //arrow function to update filter state with the inputted data from the Modal
     const handleFilterChange = (name: string) => (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -176,7 +182,7 @@ return (
    </form>
    </nav>
    {/* passing props to NewsContainer */}
-   <NewsContainer filter={filter}/>
+   <NewsContainer search={search} filter={filter}/>
    </>
     ) : (
       //  mobile first approach
@@ -222,11 +228,11 @@ return (
   
   
    <form className={NavbarStyle.form}>
-    <input/>
+    <input type="text" onChange={handleInputChange}/>
   <img src={searchIcon} alt="search icon"/>
    </form>
    </nav>
-   <NewsContainer filter={filter}/>
+   <NewsContainer search={search} filter={filter}/>
    </>
     )}
   </div>
